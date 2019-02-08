@@ -62,22 +62,27 @@ class App extends Component {
 
           <div className='table-panel'>
             <table className='user-table'>
-              <tr className='user-table-row'>
-                  <th className='user-table-cell'>NAME</th>
-                  <th className='user-table-cell'>AGE</th>
-                  <th className='user-table-cell'>OCCUPATION</th>
-              </tr>
-              {
-                usersList.map(user =>{
-                    return (
-                      <tr className='user-table-row'>
-                          <th className='user-table-cell'>{user.name}</th>
-                          <th className='user-table-cell'>{user.age}</th>
-                          <th className='user-table-cell'>{user.occupation}</th>
-                      </tr>
-                    )
-                })
-              }
+              <thead>
+
+              </thead>
+              <tbody>
+                <tr className='user-table-row'>
+                    <th className='user-table-cell'>NAME</th>
+                    <th className='user-table-cell'>AGE</th>
+                    <th className='user-table-cell'>OCCUPATION</th>
+                </tr>
+                {
+                  usersList.map(user =>{
+                      return (
+                        <tr className='user-table-row'>
+                            <th className='user-table-cell'>{user.name}</th>
+                            <th className='user-table-cell'>{user.age}</th>
+                            <th className='user-table-cell'>{user.occupation}</th>
+                        </tr>
+                      )
+                  })
+                }
+              </tbody>
             </table>
           </div>
           
