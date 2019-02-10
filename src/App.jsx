@@ -25,8 +25,7 @@ class App extends Component {
         }
     };
 
-    this.handleChangeInfo = this.handleChangeInfo.bind(this);
-    this.handleAddUser = this.handleAddUser.bind(this);
+    //this.handleAddUser2 = this.handleAddUser2.bind(this);
   }
 
   handleChangeInfo = e => {
@@ -43,13 +42,33 @@ class App extends Component {
   handleAddUser = e => {
 
     let user = this.state.user;
-    let usersList = this.state.usersList;
+    let usersList = [...this.state.usersList];
 
     usersList.push(user);
 
-    this.setState(usersList);
+    this.setState({usersList : usersList});
 
     e.preventDefault();
+  }
+
+  handleAddUser2(e) {
+    let user = this.state.user;
+    let usersList = [...this.state.usersList];
+
+    usersList.push(user);
+
+    this.setState({usersList : usersList});
+
+    e.preventDefault();
+  }
+
+  deleteUser = rowIndex => {
+
+    let usersList = [...this.state.usersList];
+
+    usersList.splice(rowIndex, 1);
+
+    this.setState({usersList: usersList});
   }
 
   render() {
@@ -59,6 +78,18 @@ class App extends Component {
       <div className="App">
 
           <h1>FORMS APP</h1>
+
+          <div className='forms-panel'>
+            <form>
+              Name: <br/> <input type="text" name="name" placeholder="Name" onChange={this.handleChangeInfo} /><br/>
+              Age: <br/> <input type="text" name="age" placeholder="Age" onChange={this.handleChangeInfo} /><br/>
+              Occupation: <br/> <input type="text" name="occupation" placeholder="Occupation" onChange={this.handleChangeInfo} /><br/>
+              <br/>
+              <button type="button" onClick={this.handleAddUser}>Add</button>
+            </form>
+          </div>
+
+          <br/>
 
           <div className='table-panel'>
             <table className='user-table'>
@@ -70,30 +101,22 @@ class App extends Component {
                     <th className='user-table-cell'>NAME</th>
                     <th className='user-table-cell'>AGE</th>
                     <th className='user-table-cell'>OCCUPATION</th>
+                    <th className='user-table-cell'></th>
                 </tr>
                 {
-                  usersList.map(user =>{
+                  usersList.map((user, index) =>{
                       return (
                         <tr className='user-table-row'>
                             <th className='user-table-cell'>{user.name}</th>
                             <th className='user-table-cell'>{user.age}</th>
                             <th className='user-table-cell'>{user.occupation}</th>
+                            <th className='user-table-cell'><button type='button' onClick={() => this.deleteUser(index)}>Delete User</button></th>
                         </tr>
                       )
                   })
                 }
               </tbody>
             </table>
-          </div>
-          
-          <div className='forms-panel'>
-            <form>
-              Name: <br/> <input type="text" name="name" placeholder="Name" onChange={this.handleChangeInfo} /><br/>
-              Age: <br/> <input type="text" name="age" placeholder="Age" onChange={this.handleChangeInfo} /><br/>
-              Occupation: <br/> <input type="text" name="occupation" placeholder="Occupation" onChange={this.handleChangeInfo} /><br/>
-              <br/>
-              <button type="button" onClick={this.handleAddUser}>Add</button>
-            </form>
           </div>
       </div>
     );
