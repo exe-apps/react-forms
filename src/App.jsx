@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Forms } from './components/forms';
+import { Tables } from './components/tables';
 
 class App extends Component {
   constructor(props) {  
@@ -16,7 +18,17 @@ class App extends Component {
             name: 'Thomasito',
             age: 24,
             occupation: 'Sky Diver'  
-          }
+          },
+          {
+            name: 'Cisco',
+            age: 23,
+            occupation: 'Telephone Operator'  
+          },
+          {
+            name: 'Acer',
+            age: 22,
+            occupation: 'Laptop'  
+          },
         ],
         user: {
           name: '',
@@ -72,7 +84,6 @@ class App extends Component {
   }
 
   render() {
-    let usersList = this.state.usersList;
 
     return (
       <div className="App">
@@ -80,43 +91,16 @@ class App extends Component {
           <h1>FORMS APP</h1>
 
           <div className='forms-panel'>
-            <form>
-              Name: <br/> <input type="text" name="name" placeholder="Name" onChange={this.handleChangeInfo} /><br/>
-              Age: <br/> <input type="text" name="age" placeholder="Age" onChange={this.handleChangeInfo} /><br/>
-              Occupation: <br/> <input type="text" name="occupation" placeholder="Occupation" onChange={this.handleChangeInfo} /><br/>
-              <br/>
-              <button type="button" onClick={this.handleAddUser}>Add</button>
-            </form>
+            <Forms 
+              handleChangeInfo={this.handleChangeInfo} 
+              handleAddUser={this.handleAddUser} 
+            />
           </div>
-
+          
           <br/>
 
           <div className='table-panel'>
-            <table className='user-table'>
-              <thead>
-
-              </thead>
-              <tbody>
-                <tr className='user-table-row'>
-                    <th className='user-table-cell'>NAME</th>
-                    <th className='user-table-cell'>AGE</th>
-                    <th className='user-table-cell'>OCCUPATION</th>
-                    <th className='user-table-cell'></th>
-                </tr>
-                {
-                  usersList.map((user, index) =>{
-                      return (
-                        <tr className='user-table-row'>
-                            <th className='user-table-cell'>{user.name}</th>
-                            <th className='user-table-cell'>{user.age}</th>
-                            <th className='user-table-cell'>{user.occupation}</th>
-                            <th className='user-table-cell'><button type='button' onClick={() => this.deleteUser(index)}>Delete User</button></th>
-                        </tr>
-                      )
-                  })
-                }
-              </tbody>
-            </table>
+            <Tables usersList={this.state.usersList} deleteUser={this.deleteUser} />
           </div>
       </div>
     );
